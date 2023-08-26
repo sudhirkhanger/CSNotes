@@ -1,0 +1,239 @@
+* Kotlin cheat sheet for white board problem solving
+
+** How to execute Kotlin code
+
+#+begin_src java
+kotlinc KotlinFileName.kt -include-runtime -d output.jar
+java -jar output.jar
+#+end_src
+
+** Loop
+
+#+begin_src java
+for (item in collection) { print(item) }
+for (i in 1..5) print(i) = 12345
+for (i in 1 until 5) { print(i) } = 1234
+for (i in 5..1) print(i) = 
+for (i in 5 downTo 1) print(i) = 54321
+for (i in 1..4 step 2) print(i) = 135
+for (i in 4 downTo 1 step 2) print(i) = 531
+for (index in collection.indices) { println("index = $index, element = ${collection[index]}") }
+for ((index, element) in collection.withIndex()) { println("index = $index, element = $element") }
+collection.forEach { element -> println(element) }
+collection.forEachIndexed{index, element -> println("index = $index, element = $element") }
+#+end_src
+
+** Main Method
+
+#+begin_src java
+fun main(args: Array<String>) {
+    // body
+}
+
+fun main() {
+    // body
+}
+#+end_src
+
+** String
+
+*** String can be treated as a collection
+
+#+begin_src java
+val text = "kotlin"
+for (letter in text) { println(letter) }
+for (item in text.indices) { println(text[item]) }
+#+end_src
+
+*** Length
+
+#+begin_src java
+text.length
+#+end_src
+
+*** Substring
+
+#+begin_src java
+fun String.substring(startIndex: Int): String
+fun String.substring(startIndex: Int, endIndex: Int): String // exclusive of endIndex
+#+end_src
+
+** Print collection
+
+#+begin_src java
+collection.joinToString()
+collection.joinToString(separator = "DILIMITER")
+#+end_src
+
+** Basic Types
+
+#+begin_src java
+val a: Int = 10000
+val d: Double = 100.00
+val f: Float = 100.00f
+val l: Long = 1000000004
+val l = 1L
+val letter: Char = 'A' 
+val b: Boolean = true
+val s: String = "hello"
+#+end_src
+
+** IntArray
+
+ - Arrays of primitive types without boxing overhead
+ - no inheritance relation to the Array class but same set of methods and properties
+
+#+begin_src java
+val x: IntArray = intArrayOf(1, 2, 3)
+val arr = IntArray(5) // [0, 0, 0, 0, 0]
+val arr = IntArray(5) { 42 } // [42, 42, 42, 42, 42]
+var arr = IntArray(5) { it * 1 } // [0, 1, 2, 3, 4]
+
+x.size // size property
+arr[index] = value
+fun IntArray.sortedArray(): IntArray // stable sorting
+#+end_src
+
+* Notes
+
+- Collection which includes list, set, and map are resizeable.
+- IntArray stores primitive and unboxed items. Array<Int> and collection stores boxed types.
+   
+* To-the-power-of operator
+
+** Manual
+
+#+begin_src java
+fun pow(base: Int, exponent: Int): Long {
+    var result: Long = 1
+
+    while (exponent != 0) {
+        result *= base.toLong()
+        --exponent
+    }
+
+    return result
+}
+#+end_src
+
+** pow() from Math class
+
+#+begin_src java
+Math.pow(base.toDouble(), exponent.toDouble())
+#+end_src
+
+* Pre and post increment
+
+#+begin_src java
+++a increments and then returns the variable
+a++ returns and then increments the variable
+var a = 1
+println(a++); //You will see 1
+//Now a is 2
+println(++a); //You will see 3
+#+end_src
+
+* Structural Jump Expressions (return, break, and continue)
+
+ - return - returns from the nearest enclosing function or anonymous function
+ - break - terminates the nearest enclosing loop
+ - continue - skip remaining and continue with next step or proceeds to the next step of the nearest enclosing loop
+
+#+begin_src java
+here@ for (i in 1..5) {
+    for (j in 1..4) {
+        if (i == 3 || j == 2)
+            continue@here
+        println("i = $i; j = $j")
+    }
+}
+#+end_src
+
+* Map<K, V>
+
+- Doesn't inherit Collection interface but is Kotlin Collection type.
+- Stores key-value pairs. Keys are unique.
+
+** Map (immutable)
+
+#+begin_src java
+// creates an immutable map without write operations
+val numbersMap = mapOf("key1" to 1, "key2" to 2, "key3" to 3, "key4" to 1)
+
+println(numbersMap.get("1"))
+println(numbersMap["key1"])
+println(numbersMap.getOrDefault("key5", 0)) // return default if key not found
+
+println("${numbersMap.keys}") // [key1, key2, key3, key4]
+println("${numbersMap.values}") // [1, 2, 3, 1]
+
+if ("key2" in numbersMap) // return true if key2 is found
+if (1 in numbersMap.values) // returns true if value 1 is in the map
+if (numbersMap.containsKey(key)) // same as previous
+if (numbersMap.containsValue(1)) // same as previous
+for ((k, v) in numbersMap) // returns the pair if found
+println("Entries: " + numbersMap.entries) // Entries: [key1=1, key2=2, key3=3, keys4=1]
+println("Keys:" + numbersMap.keys) // Keys:[key1, key2, key3, key4]
+println("Values:" + numbersMap.values) // Values:[1, 2, 3, 1]
+#+end_src
+
+** MutableMap (Mutable or with write operation)
+
+#+begin_src java
+// creates an immutable map without write operations
+val numbersMap = mutableMapOf("key1" to 1, "key2" to 2, "key3" to 3)
+numbersMap.put("key4", 1)
+numbersMap["key4"] = 1
+numbersMap.remove("key1") // remove a pair
+numbersMap.clear() // remove all pair
+#+end_src
+
+** HashMap
+
+- Default implementation is LinkedHashMap which preserves insertion order
+- HashMap - doesn't say anything about the order
+
+#+begin_src java
+val numbersMap = HashMap<String, Int>()
+items["A"] = 90
+#+end_src
+
+** Size operations
+
+#+begin_src java
+numbersMap.count
+items.count { it.value > 10 } // count values greater than 10
+numbersMap.isEmpty() // check if it is empty
+#+end_src
+
+* Array
+
+- Arrays (Array<T>) in Kotlin has a fixed size. It can't be resized after initialization.
+
+#+begin_src java
+// Initialize
+val arr = arrayOf(1, 2, 3) // [1, 2, 3]
+val arr = Array(3) {index -> index} // [1, 2, 3]
+// Length
+val size = arr.size
+// Getter
+val num = arr[0]
+// Setter
+arr[0] = 5
+// Print
+println(arr.joinToString(separator = "; ")) // 1; 2; 3
+println(arr.contentToString()) // [1, 2, 3]
+#+end_src
+
+* Scope functions
+
+| Function | Object reference | Return value   | is extension function                       |
+|----------+------------------+----------------+---------------------------------------------|
+| let      | it               | lambda result  | yes                                         |
+| run      | this             | lambda result  | yes                                         |
+| run      | -                | lambda result  | No: called without the context object       |
+| with     | this             | Lambda result  | No: takes the context object as an argument |
+| apply    | this             | Context object | Yes                                         |
+| also     | it               | Context object | Yes                                         |
+
+[[https://proandroiddev.com/dont-abuse-kotlin-s-scope-functions-6a7480fc3ce9][Don’t abuse Kotlin’s scope functions]]
