@@ -157,10 +157,8 @@ here@ for (i in 1..5) {
 ** Map (immutable)
 
 #+begin_src java
-// creates an immutable map without write operations
 val numbersMap = mapOf("key1" to 1, "key2" to 2, "key3" to 3, "key4" to 1)
-
-println(numbersMap.get("1"))
+println(numbersMap.get("1")) // returns null if not found
 println(numbersMap["key1"])
 println(numbersMap.getOrDefault("key5", 0)) // return default if key not found
 
@@ -180,7 +178,6 @@ println("Values:" + numbersMap.values) // Values:[1, 2, 3, 1]
 ** MutableMap (Mutable or with write operation)
 
 #+begin_src java
-// creates an immutable map without write operations
 val numbersMap = mutableMapOf("key1" to 1, "key2" to 2, "key3" to 3)
 numbersMap.put("key4", 1)
 numbersMap["key4"] = 1
