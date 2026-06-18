@@ -22,7 +22,7 @@
   - onStop() - Activity is not visible to the user. Killable. onRestart() or onDestory() next. Data saving or heavy load shut down operations should happen here.
   - onDestroy() - Release all resources. Activity is destroyed. Killable.
 
-[[file:/res/images/activity_lifecycle.png]]
+[[file:./res/images/activity_lifecycle.png]]
 
 - intent-filter allows other apps to open the Activity explicitly (using fully qualified name) or implicitly (by defining task/action).
 - Bundle should be used to save trivial data because it requires serialization on the main thread and consumes system-process memory.
@@ -397,7 +397,7 @@
 - An ~ExecutorService~ that assigns tasks to a pool of threads.
 - Constructor allows setting initial and maximum number of threads to be used, time to keep them alive, and a queue for holding tasks.
 
-[[file:/res/images/handler_looper_queue.png]]
+[[file:./res/images/handler_looper_queue.png]]
 
 ** Architecture Components
 
