@@ -253,32 +253,32 @@ Kotlin implements Stack and Queue's using ArrayDeque. ArrayDeque is resizable do
 which allows you to add or remove elements both at the beginning or end of the queue.
 
 #+begin_src kotlin
-    /*
-     * Stack - LIFO
-     */
+/*
+ * Stack - LIFO
+ */
     
-    val deque = ArrayDeque(listOf(1, 2, 3))
+val deque = ArrayDeque(listOf(1, 2, 3))
 
-    // push - adds the element to the end of the array
-	deque.addLast(4) // [1, 2, 3, 4]
-    // pop - removes and returns the last element
-    deque.removeLast() // [1, 2, 3]
-    // peek - returs last element without removing
-    deque.last() // 3 or NoSuchElementException
-    //size
-    deque.size // 3
-    // isEmpty
-    deque.isEmpty() // false
+// push - adds the element to the end of the array
+deque.addLast(4) // [1, 2, 3, 4]
+// pop - removes and returns the last element
+deque.removeLast() // [1, 2, 3]
+// peek - returs last element without removing
+deque.last() // 3 or NoSuchElementException
+//size
+deque.size // 3
+// isEmpty
+deque.isEmpty() // false
     
-    /*
-     * Queue - FIFO
-     * dequeue <-- first/front 4-5-6-6-2-4 last/end <-- enqueue
-     */
+/*
+ * Queue - FIFO
+ * dequeue <-- first/front 4-5-6-6-2-4 last/end <-- enqueue
+ */
 
-     // enqueue - Adds an element to the end of the array
-    deque.addLast(0) // [1, 2, 3, 0]
-    // dequeue - Removes and returns the first element
-    deque.removeFirst() // [2, 3, 0]
-    // peek - Returns the first element without removing it
-    deque.first()
+// enqueue - Adds an element to the end of the array
+deque.addLast(0) // [1, 2, 3, 0]
+// dequeue - Removes and returns the first element
+deque.removeFirst() // [2, 3, 0]
+// peek - Returns the first element without removing it
+deque.first()
 #+end_src
